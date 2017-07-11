@@ -486,7 +486,9 @@ test="#"+topicSelected;
 		    		return x(parseFloat(d.value));})
 		    .attr("cy",height/2)
 			.attr("r", function(d){
-				if(d.ISO==countrySel)
+				if((topicSelected=="HealthCareCov" ||topicSelected=="CivJustAccess"  ||topicSelected=="AltDisputeAccess" ) && d.ISO==countrySel)
+					return 12;
+				else if(d.ISO==countrySel)
 					return 8;
 
 				else if (d.Country=="OECD")
@@ -514,13 +516,13 @@ test="#"+topicSelected;
 				    		return x(parseFloat(d.value));})
 			.attr("dy",function(d){
 				if(d.ISO==countrySel)
-					return height/2+18;
+					return height/2+20;
 				else
-					return height/2-10;
+					return height/2-12;
 			})
 			.style("text-anchor","middle")
 			.text(function(d){
-				if((topicSelected=="HealthCareCov" ||topicSelected=="CivJustAccess"  ||topicSelected=="AltDisputeAccess" ) && (d.value==minValue || d.value==maxValue ))
+				if((topicSelected=="HealthCareCov" ||topicSelected=="CivJustAccess"  ||topicSelected=="AltDisputeAccess" ) && (d.value==minValue || d.value==maxValue )&& (d.ISO!=countrySel))
 					return "";
 	            else if (topicSelected=="HealthCareCov")
 	              return  d.Country+ " (" + format(d.value) + " Score"+")";
@@ -535,7 +537,12 @@ test="#"+topicSelected;
 		compChart.selectAll("circle")
 			.on("mouseover",function(d){
 			d3.select(this)
-				.attr("r",10);
+				.attr("r",function(d){
+					if((topicSelected=="HealthCareCov" ||topicSelected=="CivJustAccess"  ||topicSelected=="AltDisputeAccess" ) && d.ISO==countrySel)
+						return 14;
+					else
+						return 10	
+				});
 
 			var xPosition = event.pageX-20;
 			var yPosition = event.pageY+15;
@@ -616,13 +623,14 @@ test="#"+topicSelected;
 				
 				d3.select(this)
 				.attr("r",  function(d){
-				if(d.ISO==sel.options[sel.selectedIndex].value)
-					return 8;
-
-				else if (d.Country=="OECD")
-					return 8;
-				else
-					return 8;
+					if((topicSelected=="HealthCareCov" ||topicSelected=="CivJustAccess"  ||topicSelected=="AltDisputeAccess" ) && d.ISO==countrySel)
+						return 12;
+					else if(d.ISO==sel.options[sel.selectedIndex].value)
+						return 8;
+					else if (d.Country=="OECD")
+						return 8;
+					else
+						return 8;
 			})
 	            
 	            //Hide the tooltip
