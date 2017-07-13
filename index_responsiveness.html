@@ -466,7 +466,7 @@ test="#"+topicSelected;
 		var minValue = d3.min(data, function(d) { return parseFloat(d.value); });
 		var maxValue = d3.max(data, function(d) { return parseFloat(d.value); });
 
-		if(topicSelected=="ShortEduMat" || topicSelected=="StudyHelpAvai" || topicSelected=="IndHelpTeacher")
+		if(topicSelected=="StudyHelpAvai" || topicSelected=="IndHelpTeacher")
 			x.domain([minValue,maxValue]) ;
 		else
 			x.domain([maxValue,minValue]) ;
